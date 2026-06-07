@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PLANET HUNTER: ODYSSEY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div id="screenSplash" class="screen screen--active">
+      <div class="game-bg" aria-hidden="true">
+        <div class="starfield">
+          <div class="stars layer-1"></div>
+          <div class="stars layer-2"></div>
+          <div class="stars layer-3"></div>
+        </div>
+        <div class="pink-nebula__clouds"></div>
+        <div class="pink-nebula__planets">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="splash">
+        <div class="splash__overlay">
+          <h1 class="splash__title">PLANET HUNTER</h1>
+          <button
+            id="startExploringBtn"
+            class="btn btn--primary btn--pink splash__btn"
+            type="button"
+          >
+            START MISSION
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="screenRocky" class="screen">
+      <div class="game-bg" aria-hidden="true">
+        <div class="starfield">
+          <div class="stars layer-1"></div>
+          <div class="stars layer-2"></div>
+          <div class="stars layer-3"></div>
+        </div>
+        <div class="pink-nebula__clouds"></div>
+        <div class="pink-nebula__planets">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="rocky-intro">
+        <div class="rocky-intro__avatar">🪨✨</div>
+        <div class="rocky-intro__bubble">
+          Hey! I am Rocky, your friend in space so you would not feel alone. I
+          would love to explore space with you!
+        </div>
+        <button
+          id="goRockyBtn"
+          class="btn btn--primary btn--pink"
+          type="button"
+        >
+          LET'S GO ROCKY
+        </button>
+      </div>
+    </div>
+
+    <div id="screenMarry" class="screen">
+      <div class="game-bg" aria-hidden="true">
+        <video
+          class="bg__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate"
+          preload="auto"
+        >
+          <source
+            src="{{ url_for('static', filename='media/spaceship.mp4') }}"
+            type="video/mp4"
+          />
+        </video>
+        <div class="bg__vignette"></div>
+      </div>
+      <div class="rocky-intro">
+        <div class="rocky-intro__avatar">
+          <span class="marry-emoji">🚀</span> MARRY
+        </div>
+        <div class="rocky-intro__bubble">
+          <div>Hey Commander, look what I found!</div>
+          <br />
+          <div>
+            The sensors just picked up some amazing new stars! I've got all the
+            data ready for us. Want to head to the lab and see if we've found a
+            new home for humanity?
+          </div>
+        </div>
+        <button
+          id="goMarryBtn"
+          class="btn btn--primary btn--pink"
+          type="button"
+        >
+          LET'S EXPLORE
+        </button>
+      </div>
+    </div>
+
+    <div id="screenCommand" class="screen">
+      <div class="game-bg" aria-hidden="true">
+        <video
+          class="bg__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate"
+          preload="auto"
+        >
+          <source
+            src="{{ url_for('static', filename='media/galaxy.mp4') }}"
+            type="video/mp4"
+          />
+        </video>
+        <div class="bg__vignette"></div>
+      </div>
+
+      <div class="command-shell">
+        <header class="topbar">
+          <div class="brand">
+            <div class="brand__mark" aria-hidden="true"></div>
+            <div class="brand__title">PLANET HUNTER</div>
+          </div>
+          <div class="status">
+            <span class="status__dot" aria-hidden="true"></span>
+            <span class="status__text">SYSTEM: READY</span>
+          </div>
+        </header>
+
+        <main class="layout">
+          <section id="inputView" class="panel panel--left">
+            <div class="panel__header">
+              <div class="panel__title">SENSOR ARRAY • INPUT TELEMETRY</div>
+              <div class="panel__hint">Adjust the sensors, Commander!</div>
+            </div>
+
+            <form id="starForm" class="form" autocomplete="off">
+              <div class="field">
+                <div class="field__head">
+                  <label class="field__label" for="temperature"
+                    >Temperature (K)</label
+                  >
+                  <div class="field__value">
+                    <input
+                      id="temperatureNum"
+                      class="num"
+                      type="number"
+                      min="1500"
+                      max="60000"
+                      step="50"
+                      value="5800"
+                      inputmode="numeric"
+                    />
+                  </div>
+                </div>
+                <div class="energy">
+                  <input
+                    id="temperature"
+                    name="temperature"
+                    type="range"
+                    min="1500"
+                    max="60000"
+                    step="50"
+                    value="5800"
+                    data-energy
+                  />
+                  <div class="energy__bar" aria-hidden="true">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="field__meta"><span>Cool</span><span>Hot</span></div>
+              </div>
+
+              <div class="field">
+                <div class="field__head">
+                  <label class="field__label" for="luminosity"
+                    >Luminosity (L/Lo)</label
+                  >
+                  <div class="field__value">
+                    <input
+                      id="luminosityNum"
+                      class="num"
+                      type="number"
+                      min="0.000001"
+                      max="200000"
+                      step="0.01"
+                      value="1"
+                    />
+                  </div>
+                </div>
+                <div class="energy">
+                  <input
+                    id="luminosity"
+                    name="luminosity"
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="45"
+                    data-energy
+                  />
+                  <div class="energy__bar" aria-hidden="true">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="field__meta">
+                  <span>Dim</span><span>Bright</span>
+                </div>
+                <div class="field__note">
+                  Slider is logarithmic-mapped for usability; number box is
+                  exact.
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="field__head">
+                  <label class="field__label" for="radius">Radius (R/Ro)</label>
+                  <div class="field__value">
+                    <input
+                      id="radiusNum"
+                      class="num"
+                      type="number"
+                      min="0.0001"
+                      max="200"
+                      step="0.001"
+                      value="1"
+                    />
+                  </div>
+                </div>
+                <div class="energy">
+                  <input
+                    id="radius"
+                    name="radius"
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="40"
+                    data-energy
+                  />
+                  <div class="energy__bar" aria-hidden="true">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="field__meta">
+                  <span>Compact</span><span>Vast</span>
+                </div>
+                <div class="field__note">Slider uses logarithmic-mapping.</div>
+              </div>
+
+              <div class="field">
+                <div class="field__head">
+                  <label class="field__label" for="abs_magnitude"
+                    >Absolute Magnitude (Mv)</label
+                  >
+                  <div class="field__value">
+                    <input
+                      id="absMagNum"
+                      class="num"
+                      type="number"
+                      min="-12"
+                      max="20"
+                      step="0.1"
+                      value="4.8"
+                    />
+                  </div>
+                </div>
+                <div class="energy">
+                  <input
+                    id="abs_magnitude"
+                    name="abs_magnitude"
+                    type="range"
+                    min="-12"
+                    max="20"
+                    step="0.1"
+                    value="4.8"
+                    data-energy
+                  />
+                  <div class="energy__bar" aria-hidden="true">
+                    <span></span>
+                  </div>
+                </div>
+                <div class="field__meta">
+                  <span>Brighter</span><span>Dimmer</span>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button
+                  id="predictBtn"
+                  class="btn btn--primary btn--pink"
+                  type="submit"
+                >
+                  SCAN DATA
+                </button>
+                <button
+                  id="abortInputBtn"
+                  class="btn btn--ghost btn--pink-soft"
+                  type="button"
+                >
+                  LAUNCH
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section id="predictionView" class="panel panel--right">
+            <div class="panel__header">
+              <div class="panel__title">MISSION ANALYSIS CONSOLE</div>
+              <div class="panel__hint">
+                Prediction, habitable status, and telemetry.
+              </div>
+            </div>
+
+            <div class="prediction prediction--visual">
+              <div class="prediction__glow" aria-hidden="true"></div>
+              <div class="prediction__content">
+                <div class="starViz" aria-hidden="true">
+                  <div class="starViz__frame rocky-frame">
+                    <div id="rockyEmotion" class="rocky-face">🙂🪨</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="prediction__label">ROCKY HERE!!</div>
+                  <div
+                    id="rockyMessage"
+                    class="prediction__value rocky-message"
+                  >
+                    Rocky is standing by for your scan.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel__divider"></div>
+
+            <div id="classificationSection" class="telemetry">
+              <div class="telemetry__head">
+                <div class="telemetry__title">CLASSIFICATION TABLE</div>
+              </div>
+              <div id="scanMessage" class="scan-overlay" style="display: none">
+                <div class="scan-radar"></div>
+                <div class="scan-text">SCANNING...</div>
+              </div>
+              <div
+                id="classificationBox"
+                class="field"
+                style="margin-bottom: 0"
+              >
+                <div class="classification-card">
+                  <div class="classification-card__head">
+                    <div class="class-globe-wrap" aria-hidden="true">
+                      <div id="classGlobe" class="class-globe"></div>
+                    </div>
+                    <div class="classification-card__label">CLASSIFICATION</div>
+                  </div>
+                  <div class="classification-card__prediction">
+                    <span
+                      id="predictionText"
+                      class="classification-card__prediction-text"
+                      >—</span
+                    >
+                  </div>
+                  <div class="chip">
+                    <span class="chip__k">CONFIDENCE</span>
+                    <span id="confidenceText" class="chip__v">—</span>
+                  </div>
+                  <div class="chip chip--mono" style="margin-top: 10px">
+                    <span class="chip__k">STAR ID</span>
+                    <span id="starId" class="chip__v">NX-01</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="habitableSection" class="telemetry planet">
+              <div class="telemetry__head">
+                <div class="telemetry__title">HABITABLE ZONE INDICATOR BOX</div>
+              </div>
+              <div class="field" style="margin-bottom: 0">
+                <div class="planet__row">
+                  <img
+                    id="planetImg"
+                    class="planet__img"
+                    src="{{ url_for('static', filename='img/star_sun_like.svg') }}"
+                    alt="Habitable zone indicator"
+                  />
+                  <div class="planet__text">
+                    <div id="hzHeadline" class="planet__headline">
+                      Pending scan...
+                    </div>
+                    <div id="hzSub" class="planet__sub">
+                      Awaiting classification.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="footer">
+          <div class="footer__left">
+            Built for offline use • Flask + scikit-learn
+          </div>
+          <div class="footer__right">
+            PLANET HUNTER: ODYSSEY • Glassmorphism
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <div id="screenWarning" class="screen">
+      <div class="game-bg" aria-hidden="true">
+        <video
+          class="bg__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate"
+          preload="auto"
+        >
+          <source
+            src="{{ url_for('static', filename='media/warning.mp4') }}"
+            type="video/mp4"
+          />
+        </video>
+        <div class="bg__vignette"></div>
+      </div>
+      <div class="rocky-intro">
+        <div class="rocky-intro__avatar">⚠️</div>
+        <div class="rocky-intro__bubble">you and rocky can die</div>
+        <button
+          id="warningAbortBtn"
+          class="btn btn--primary btn--pink"
+          type="button"
+        >
+          ABORT
+        </button>
+      </div>
+    </div>
+
+    <div id="screenEnding" class="screen">
+      <div class="game-bg" aria-hidden="true">
+        <video
+          class="bg__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          disablePictureInPicture
+          controlsList="nodownload noplaybackrate"
+          preload="auto"
+        >
+          <source
+            src="{{ url_for('static', filename='media/ending.mp4') }}"
+            type="video/mp4"
+          />
+        </video>
+        <div class="bg__vignette"></div>
+      </div>
+      <div class="rocky-intro">
+        <div class="rocky-intro__bubble">
+          <div class="ending-hero-line"><span class="ending-hero-emoji">🥳🪨</span><span>congratulations!!</span></div>
+          <div>We did it.</div>
+          <div>Humanity has a second home thanks to you, Commander!</div>
+        </div>
+        <div class="rocky-intro__bubble ending-station-note">
+          <div>STATION IDENTIFIED: [Nova Terra]</div>
+          <div>Habitability: 100%.</div>
+        </div>
+        <button
+          id="restartBtn"
+          class="btn btn--primary btn--pink"
+          type="button"
+        >
+          RESTART
+        </button>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
